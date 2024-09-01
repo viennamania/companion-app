@@ -17,7 +17,10 @@ if (!!!COMPANION_NAME || !!!MODEL_NAME || !!!USER_ID) {
   );
 }
 
+
 const data = await fs.readFile("companions/" + COMPANION_NAME + ".txt", "utf8");
+
+
 const presplit = data.split("###ENDPREAMBLE###");
 const preamble = presplit[0];
 const seedsplit = presplit[1].split("###ENDSEEDCHAT###");
