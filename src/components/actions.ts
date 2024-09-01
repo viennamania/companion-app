@@ -1,6 +1,8 @@
 "use server";
 
-import { aw } from "@upstash/redis/zmscore-uDFFyCiZ";
+
+//import { aw } from "@upstash/redis/zmscore-uDFFyCiZ";
+
 // server action to allow configuration of LLM from .env.local
 
 import dotenv from "dotenv";
@@ -35,6 +37,6 @@ export async function getCompanions() {
 
   var js = JSON.parse(String(data));
 
-  
+
   return String(data);
 }
