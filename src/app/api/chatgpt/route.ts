@@ -35,9 +35,13 @@ export async function POST(req: Request) {
 
   // XXX Companion name passed here. Can use as a key to get backstory, chat history etc.
   const name = req.headers.get("name");
+
+
   const companionFileName = name + ".txt";
 
   console.log("prompt: ", prompt);
+
+
   if (isText) {
     clerkUserId = userId;
     clerkUserName = userName;
@@ -65,14 +69,29 @@ export async function POST(req: Request) {
   // only included if it matches a similarity comparioson with the current
   // discussion. The PREAMBLE should include a seed conversation whose format will
   // vary by the model using it.
+
+  /*
   const fs = require("fs").promises;
   const data = await fs.readFile("companions/" + companionFileName, "utf8");
+  */
+
+
+  // fetch companion from api
+  // /api/companions?name=Alex
+
+  const response = await fetch("/api/companions?name=" + name);
+  
+
+  const data = await response.text();
+
+
 
   // Clunky way to break out PREAMBLE and SEEDCHAT from the character file
   const presplit = data.split("###ENDPREAMBLE###");
   const preamble = presplit[0];
   const seedsplit = presplit[1].split("###ENDSEEDCHAT###");
   const seedchat = seedsplit[0];
+
 
   const companionKey = {
     companionName: name!,
@@ -145,7 +164,10 @@ export async function POST(req: Request) {
     result!.text + "\n",
     companionKey
   );
+  
   console.log("chatHistoryRecord", chatHistoryRecord);
+
+
   if (isText) {
     return NextResponse.json(result!.text);
   }
