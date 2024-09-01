@@ -24,9 +24,15 @@ export async function getCompanions() {
   
   //const data = fs.readFileSync(COMPFILE);
 
-
-  const usersPath = path.join(process.cwd(), COMPFILE);
+  /*
+  const usersPath = path.join(process.cwd(), "/.next/server/companions/companions.json");
   const  data = fs.readFileSync(usersPath, 'utf8');
+  */
+  // fetch /api/companions
+
+  //const data = await fetch('/api/companions');
+
+  const data = await fetch('/api/companions');
 
 
   console.log(String(data));

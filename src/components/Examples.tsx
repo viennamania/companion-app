@@ -27,8 +27,27 @@ export default function Examples() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const companions = await getCompanions();
+        
+        
+        ///const companions = await getCompanions();
+
+        /*
+        const response = await fetch('/api/companions');
+
+        const companions = await response.text();
+
+
+
         let entries = JSON.parse(companions);
+        */
+
+        const response = await fetch('/api/companions');
+
+        const entries = await response.json();
+
+        console.log(entries);
+
+
         let setme = entries.map((entry: any) => ({
           name: entry.name,
           title: entry.title,
