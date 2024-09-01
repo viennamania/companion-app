@@ -36,11 +36,31 @@ const langchainDocs = await Promise.all(
 );
 
 const client = new PineconeClient();
+
+
+/*
+[PineconeError: Failed getting project name. TypeError: fetch failed]
+*/
+
 await client.init({
   apiKey: process.env.PINECONE_API_KEY,
   environment: process.env.PINECONE_ENVIRONMENT,
+  
+  //project: 'Serverless',
+
+
 });
 const pineconeIndex = client.Index(process.env.PINECONE_INDEX);
+
+/*
+https://unove-ojq9hyc.svc.aped-4627-b74a.pinecone.io
+*/
+
+
+
+
+
+
 
 await PineconeStore.fromDocuments(
   langchainDocs.flat().filter((doc) => doc !== undefined),
